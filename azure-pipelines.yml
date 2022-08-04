@@ -6,8 +6,8 @@
 trigger:
 - main
 
-pool: Self-Hosted
-#  vmImage: ubuntu-latest
+pool:
+  vmImage: ubuntu-latest
 
 steps:
 - task: AzureResourceManagerTemplateDeployment@3
