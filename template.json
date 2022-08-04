@@ -1,0 +1,113 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "workflows_LogicAppTestLearn_name": {
+            "defaultValue": "LogicAppTestLearn",
+            "type": "String"
+        },
+        "connections_office365_1_externalid": {
+            "defaultValue": "/subscriptions/eeca7b64-8f77-4cfd-bbdd-9c3f87240351/resourceGroups/Hackathon/providers/Microsoft.Web/connections/office365-1",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Logic/workflows",
+            "apiVersion": "2017-07-01",
+            "name": "[parameters('workflows_LogicAppTestLearn_name')]",
+            "location": "eastus",
+            "properties": {
+                "state": "Enabled",
+                "definition": {
+                    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+                    "contentVersion": "1.0.0.0",
+                    "parameters": {
+                        "$connections": {
+                            "defaultValue": {},
+                            "type": "Object"
+                        }
+                    },
+                    "triggers": {
+                        "When_a_new_email_arrives_(V3)": {
+                            "splitOn": "@triggerBody()?['value']",
+                            "splitOnConfiguration": {
+                                "correlation": {
+                                    "clientTrackingId": "TarckId-1"
+                                }
+                            },
+                            "correlation": {
+                                "clientTrackingId": "TarckId-1"
+                            },
+                            "type": "ApiConnectionNotification",
+                            "inputs": {
+                                "fetch": {
+                                    "method": "get",
+                                    "pathTemplate": {
+                                        "template": "/v3/Mail/OnNewEmail"
+                                    },
+                                    "queries": {
+                                        "fetchOnlyWithAttachment": false,
+                                        "folderPath": "Inbox",
+                                        "importance": "Any",
+                                        "includeAttachments": false
+                                    }
+                                },
+                                "host": {
+                                    "connection": {
+                                        "name": "@parameters('$connections')['office365']['connectionId']"
+                                    }
+                                },
+                                "subscribe": {
+                                    "body": {
+                                        "NotificationUrl": "@{listCallbackUrl()}"
+                                    },
+                                    "method": "post",
+                                    "pathTemplate": {
+                                        "template": "/GraphMailSubscriptionPoke/$subscriptions"
+                                    },
+                                    "queries": {
+                                        "fetchOnlyWithAttachment": false,
+                                        "folderPath": "Inbox",
+                                        "importance": "Any"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "actions": {
+                        "Forward_an_email_(V2)": {
+                            "runAfter": {},
+                            "type": "ApiConnection",
+                            "inputs": {
+                                "body": {
+                                    "ToRecipients": "manikumar446@gmail.com"
+                                },
+                                "host": {
+                                    "connection": {
+                                        "name": "@parameters('$connections')['office365']['connectionId']"
+                                    }
+                                },
+                                "method": "post",
+                                "path": "/codeless/v1.0/me/messages/@{encodeURIComponent(triggerBody()?['id'])}/forward"
+                            }
+                        }
+                    },
+                    "outputs": {}
+                },
+                "parameters": {
+                    "$connections": {
+                        "value": {
+                            "office365": {
+                                "connectionId": "[parameters('connections_office365_1_externalid')]",
+                                "connectionName": "office365-1",
+                                "id": "/subscriptions/eeca7b64-8f77-4cfd-bbdd-9c3f87240351/providers/Microsoft.Web/locations/eastus/managedApis/office365"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}
