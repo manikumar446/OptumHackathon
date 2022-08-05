@@ -1,0 +1,57 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "connections_azureblob_name": {
+            "value": null
+        },
+        "connections_office365_name": {
+            "value": null
+        },
+        "connections_documentdb_name": {
+            "value": null
+        },
+        "connections_servicebus_name": {
+            "value": null
+        },
+        "connections_office365_1_name": {
+            "value": null
+        },
+        "connections_office365_2_name": {
+            "value": null
+        },
+        "connections_formrecognizer_name": {
+            "value": null
+        },
+        "namespaces_optumhack_name": {
+            "value": null
+        },
+        "workflows_optumemailreader_name": {
+            "value": null
+        },
+        "workflows_optumemailprocess_name": {
+            "value": null
+        },
+        "connections_conversionservice_name": {
+            "value": null
+        },
+        "accounts_optumformrecognizer_name": {
+            "value": null
+        },
+        "connections_cognitiveservicestextanalytics_name": {
+            "value": null
+        },
+        "accounts_optumcognitiveservice_name": {
+            "value": null
+        },
+        "subscription_id": {
+            "value": null
+        },
+        "resource_group_name": {
+            "value": null
+        },
+        "resource_group_location": {
+            "value": null
+        }
+    }
+}

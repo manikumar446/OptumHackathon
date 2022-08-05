@@ -1,0 +1,1129 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "connections_azureblob_name": {
+            "defaultValue": "azureblob111",
+            "type": "String"
+        },
+        "connections_office365_name": {
+            "defaultValue": "office365111",
+            "type": "String"
+        },
+        "connections_documentdb_name": {
+            "defaultValue": "documentdb111",
+            "type": "String"
+        },
+        "connections_servicebus_name": {
+            "defaultValue": "servicebus111",
+            "type": "String"
+        },
+        "connections_office365_1_name": {
+            "defaultValue": "office365-1111",
+            "type": "String"
+        },
+        "connections_office365_2_name": {
+            "defaultValue": "office365-2111",
+            "type": "String"
+        },
+        "connections_formrecognizer_name": {
+            "defaultValue": "formrecognizer111",
+            "type": "String"
+        },
+        "namespaces_optumhack_name": {
+            "defaultValue": "optumhack111",
+            "type": "String"
+        },
+        "workflows_optumemailreader_name": {
+            "defaultValue": "optumemailreader111",
+            "type": "String"
+        },
+        "workflows_optumemailprocess_name": {
+            "defaultValue": "optumemailprocess111",
+            "type": "String"
+        },
+        "connections_conversionservice_name": {
+            "defaultValue": "conversionservice111",
+            "type": "String"
+        },
+        "accounts_optumformrecognizer_name": {
+            "defaultValue": "optumformrecognizer111",
+            "type": "String"
+        },
+        "connections_cognitiveservicestextanalytics_name": {
+            "defaultValue": "cognitiveservicestextanalytics111",
+            "type": "String"
+        },
+        "accounts_optumcognitiveservice_name": {
+            "defaultValue": "optumcognitiveservice111",
+            "type": "String"
+        },
+        "subscription_id": {
+            "defaultValue": "5f9408a9-1889-41f0-8c06-f3c880e19c6a",
+            "type": "String"
+        },
+        "resource_group_name": {
+            "defaultValue": "OptumHack111",
+            "type": "String"
+        },
+        "resource_group_location": {
+            "type": "string",
+            "defaultValue": "East US"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Resources/resourceGroups",
+            "apiVersion": "2021-04-01",
+            "name": "[parameters('resource_group_name')]",
+            "location": "[parameters('resource_group_location')]",
+            "properties": {}
+        },
+        {
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2021-04-01",
+            "name": "nestedDeployment",
+            "resourceGroup": "[parameters('resource_group_name')]",
+            "properties": {
+                "mode": "Incremental",
+                "template": {
+                    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+                    "contentVersion": "1.0.0.0",
+                    "resources": [
+                        {
+                            "type": "Microsoft.CognitiveServices/accounts",
+                            "apiVersion": "2022-03-01",
+                            "name": "[parameters('accounts_optumcognitiveservice_name')]",
+                            "location": "centralindia",
+                            "sku": {
+                                "name": "F0"
+                            },
+                            "kind": "TextAnalytics",
+                            "identity": {
+                                "type": "SystemAssigned"
+                            },
+                            "properties": {
+                                "apiProperties": {},
+                                "customSubDomainName": "[parameters('accounts_optumcognitiveservice_name')]",
+                                "networkAcls": {
+                                    "defaultAction": "Allow",
+                                    "virtualNetworkRules": [],
+                                    "ipRules": []
+                                },
+                                "publicNetworkAccess": "Enabled"
+                            }
+                        },
+                        {
+                            "type": "Microsoft.CognitiveServices/accounts",
+                            "apiVersion": "2022-03-01",
+                            "name": "[parameters('accounts_optumformrecognizer_name')]",
+                            "location": "centralindia",
+                            "sku": {
+                                "name": "F0"
+                            },
+                            "kind": "FormRecognizer",
+                            "identity": {
+                                "type": "None"
+                            },
+                            "properties": {
+                                "customSubDomainName": "[parameters('accounts_optumformrecognizer_name')]",
+                                "networkAcls": {
+                                    "defaultAction": "Allow",
+                                    "virtualNetworkRules": [],
+                                    "ipRules": []
+                                },
+                                "publicNetworkAccess": "Enabled"
+                            }
+                        },
+                        {
+                            "type": "Microsoft.ServiceBus/namespaces",
+                            "apiVersion": "2022-01-01-preview",
+                            "name": "[parameters('namespaces_optumhack_name')]",
+                            "location": "South India",
+                            "sku": {
+                                "name": "Basic",
+                                "tier": "Basic"
+                            },
+                            "properties": {
+                                "minimumTlsVersion": "1.2",
+                                "publicNetworkAccess": "Enabled",
+                                "disableLocalAuth": false,
+                                "zoneRedundant": false
+                            }
+                        },
+                        {
+                            "type": "Microsoft.Web/connections",
+                            "apiVersion": "2016-06-01",
+                            "name": "[parameters('connections_azureblob_name')]",
+                            "location": "southindia",
+                            "kind": "V1",
+                            "properties": {
+                                "displayName": "optumblob",
+                                "statuses": [
+                                    {
+                                        "status": "Connected"
+                                    }
+                                ],
+                                "customParameterValues": {},
+                                "createdTime": "2022-08-04T06:38:44.3158911Z",
+                                "changedTime": "2022-08-04T06:38:44.3158911Z",
+                                "api": {
+                                    "name": "[parameters('connections_azureblob_name')]",
+                                    "displayName": "Azure Blob Storage",
+                                    "description": "Microsoft Azure Storage provides a massively scalable, durable, and highly available storage for data on the cloud, and serves as the data storage solution for modern applications. Connect to Blob Storage to perform various operations such as create, update, get and delete on blobs in your Azure Storage account.",
+                                    "iconUri": "[concat('https://connectoricons-prod.azureedge.net/releases/v1.0.1586/1.0.1586.2912/', parameters('connections_azureblob_name'), '/icon.png')]",
+                                    "brandColor": "#804998",
+                                    "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/southindia/managedApis/', parameters('connections_azureblob_name'))]",
+                                    "type": "Microsoft.Web/locations/managedApis"
+                                },
+                                "testLinks": [
+                                    {
+                                        "requestUri": "[concat('https://management.azure.com:443/subscriptions/',parameters('subscription_id'),'/resourceGroups/', parameters('resource_group_name'), '/providers/Microsoft.Web/connections/', parameters('connections_azureblob_name'), '/extensions/proxy/testconnection?api-version=2016-06-01')]",
+                                        "method": "get"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "type": "Microsoft.Web/connections",
+                            "apiVersion": "2016-06-01",
+                            "name": "[parameters('connections_cognitiveservicestextanalytics_name')]",
+                            "location": "southindia",
+                            "kind": "V1",
+                            "properties": {
+                                "displayName": "optumcognitiveconn",
+                                "statuses": [
+                                    {
+                                        "status": "Connected"
+                                    }
+                                ],
+                                "customParameterValues": {},
+                                "createdTime": "2022-08-04T13:11:40.7286494Z",
+                                "changedTime": "2022-08-04T13:11:40.7286494Z",
+                                "api": {
+                                    "name": "[parameters('connections_cognitiveservicestextanalytics_name')]",
+                                    "displayName": "Azure Cognitive Service for Language",
+                                    "description": "Azure Cognitive Service for Language, previously known as 'Text Analytics' connector detects language, sentiment and more of the text you provide.",
+                                    "iconUri": "[concat('https://connectoricons-prod.azureedge.net/releases/v1.0.1584/1.0.1584.2880/', parameters('connections_cognitiveservicestextanalytics_name'), '/icon.png')]",
+                                    "brandColor": "#1267AE",
+                                    "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/southindia/managedApis/', parameters('connections_cognitiveservicestextanalytics_name'))]",
+                                    "type": "Microsoft.Web/locations/managedApis"
+                                },
+                                "testLinks": []
+                            }
+                        },
+                        {
+                            "type": "Microsoft.Web/connections",
+                            "apiVersion": "2016-06-01",
+                            "name": "[parameters('connections_conversionservice_name')]",
+                            "location": "southindia",
+                            "kind": "V1",
+                            "properties": {
+                                "displayName": "Content Conversion",
+                                "statuses": [
+                                    {
+                                        "status": "Connected"
+                                    }
+                                ],
+                                "customParameterValues": {},
+                                "nonSecretParameterValues": {},
+                                "createdTime": "2022-08-04T13:19:47.1290143Z",
+                                "changedTime": "2022-08-04T13:19:47.1290143Z",
+                                "api": {
+                                    "name": "[parameters('connections_conversionservice_name')]",
+                                    "displayName": "Content Conversion",
+                                    "description": "A service that allows content to be converted from one format to another.",
+                                    "iconUri": "[concat('https://connectoricons-prod.azureedge.net/releases/v1.0.1586/1.0.1586.2912/', parameters('connections_conversionservice_name'), '/icon.png')]",
+                                    "brandColor": "#4f6bed",
+                                    "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/southindia/managedApis/', parameters('connections_conversionservice_name'))]",
+                                    "type": "Microsoft.Web/locations/managedApis"
+                                },
+                                "testLinks": []
+                            }
+                        },
+                        {
+                            "type": "Microsoft.Web/connections",
+                            "apiVersion": "2016-06-01",
+                            "name": "[parameters('connections_documentdb_name')]",
+                            "location": "southindia",
+                            "kind": "V1",
+                            "properties": {
+                                "displayName": "claimCon",
+                                "statuses": [
+                                    {
+                                        "status": "Connected"
+                                    }
+                                ],
+                                "customParameterValues": {},
+                                "createdTime": "2022-08-04T06:11:51.6406069Z",
+                                "changedTime": "2022-08-04T06:11:51.6406069Z",
+                                "api": {
+                                    "name": "[parameters('connections_documentdb_name')]",
+                                    "displayName": "Azure Cosmos DB",
+                                    "description": "Azure Cosmos DB is a globally distributed multi-model database service designed to enable you to elastically and independently scale throughput and storage across any number of geographical regions with a comprehensive SLA.",
+                                    "iconUri": "[concat('https://connectoricons-prod.azureedge.net/releases/v1.0.1583/1.0.1583.2865/', parameters('connections_documentdb_name'), '/icon.png')]",
+                                    "brandColor": "#1C3A56",
+                                    "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/southindia/managedApis/', parameters('connections_documentdb_name'))]",
+                                    "type": "Microsoft.Web/locations/managedApis"
+                                },
+                                "testLinks": [
+                                    {
+                                        "requestUri": "[concat('https://management.azure.com:443/subscriptions/',parameters('subscription_id'),'/resourceGroups/', parameters('resource_group_name'), '/providers/Microsoft.Web/connections/', parameters('connections_documentdb_name'), '/extensions/proxy/testConnection?api-version=2016-06-01')]",
+                                        "method": "get"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "type": "Microsoft.Web/connections",
+                            "apiVersion": "2016-06-01",
+                            "name": "[parameters('connections_formrecognizer_name')]",
+                            "location": "southindia",
+                            "kind": "V1",
+                            "properties": {
+                                "displayName": "[concat('optum', parameters('connections_formrecognizer_name'), 'conn')]",
+                                "statuses": [
+                                    {
+                                        "status": "Connected"
+                                    }
+                                ],
+                                "customParameterValues": {},
+                                "nonSecretParameterValues": {
+                                    "siteUrl": "[concat('https://optum', parameters('connections_formrecognizer_name'), '.cognitiveservices.azure.com/')]"
+                                },
+                                "createdTime": "2022-08-04T12:17:52.743068Z",
+                                "changedTime": "2022-08-04T12:17:52.743068Z",
+                                "api": {
+                                    "name": "[parameters('connections_formrecognizer_name')]",
+                                    "displayName": "Form Recognizer",
+                                    "description": "Extracts information from forms and images into structured data based on pre-trained models or model created by a set of representative training forms.",
+                                    "iconUri": "[concat('https://connectoricons-prod.azureedge.net/releases/v1.0.1580/1.0.1580.2838/', parameters('connections_formrecognizer_name'), '/icon.png')]",
+                                    "brandColor": "#0063B1",
+                                    "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/southindia/managedApis/', parameters('connections_formrecognizer_name'))]",
+                                    "type": "Microsoft.Web/locations/managedApis"
+                                },
+                                "testLinks": []
+                            }
+                        },
+                        {
+                            "type": "Microsoft.Web/connections",
+                            "apiVersion": "2016-06-01",
+                            "name": "[parameters('connections_office365_name')]",
+                            "location": "southindia",
+                            "kind": "V1",
+                            "properties": {
+                                "displayName": "dheeraj.swami@optum.com",
+                                "statuses": [
+                                    {
+                                        "status": "Connected"
+                                    }
+                                ],
+                                "customParameterValues": {},
+                                "nonSecretParameterValues": {},
+                                "createdTime": "2022-08-04T06:02:18.5502715Z",
+                                "changedTime": "2022-08-04T06:03:13.4124396Z",
+                                "api": {
+                                    "name": "[parameters('connections_office365_name')]",
+                                    "displayName": "Office 365 Outlook",
+                                    "description": "Microsoft Office 365 is a cloud-based service that is designed to help meet your organization's needs for robust security, reliability, and user productivity.",
+                                    "iconUri": "[concat('https://connectoricons-prod.azureedge.net/releases/v1.0.1591/1.0.1591.2961/', parameters('connections_office365_name'), '/icon.png')]",
+                                    "brandColor": "#0078D4",
+                                    "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/southindia/managedApis/', parameters('connections_office365_name'))]",
+                                    "type": "Microsoft.Web/locations/managedApis"
+                                },
+                                "testLinks": [
+                                    {
+                                        "requestUri": "[concat('https://management.azure.com:443/subscriptions/',parameters('subscription_id'), '/resourceGroups/', parameters('resource_group_name'), '/providers/Microsoft.Web/connections/', parameters('connections_office365_name'), '/extensions/proxy/testconnection?api-version=2016-06-01')]",
+                                        "method": "get"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "type": "Microsoft.Web/connections",
+                            "apiVersion": "2016-06-01",
+                            "name": "[parameters('connections_office365_1_name')]",
+                            "location": "southindia",
+                            "kind": "V1",
+                            "properties": {
+                                "displayName": "Office 365 Outlook",
+                                "statuses": [
+                                    {
+                                        "status": "Error",
+                                        "target": "token",
+                                        "error": {}
+                                    }
+                                ],
+                                "customParameterValues": {},
+                                "nonSecretParameterValues": {},
+                                "createdTime": "2022-08-04T06:50:52.1264509Z",
+                                "changedTime": "2022-08-04T06:53:59.3632865Z",
+                                "api": {
+                                    "name": "office365",
+                                    "displayName": "Office 365 Outlook",
+                                    "description": "Microsoft Office 365 is a cloud-based service that is designed to help meet your organization's needs for robust security, reliability, and user productivity.",
+                                    "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1591/1.0.1591.2961/office365/icon.png",
+                                    "brandColor": "#0078D4",
+                                    "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/southindia/managedApis/office365')]",
+                                    "type": "Microsoft.Web/locations/managedApis"
+                                },
+                                "testLinks": [
+                                    {
+                                        "requestUri": "[concat('https://management.azure.com:443/subscriptions/',parameters('subscription_id'),'/resourceGroups/', parameters('resource_group_name'), '/providers/Microsoft.Web/connections/', parameters('connections_office365_1_name'), '/extensions/proxy/testconnection?api-version=2016-06-01')]",
+                                        "method": "get"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "type": "Microsoft.Web/connections",
+                            "apiVersion": "2016-06-01",
+                            "name": "[parameters('connections_office365_2_name')]",
+                            "location": "southindia",
+                            "kind": "V1",
+                            "properties": {
+                                "displayName": "boora.brahmmam@optum.com",
+                                "statuses": [
+                                    {
+                                        "status": "Connected"
+                                    }
+                                ],
+                                "customParameterValues": {},
+                                "nonSecretParameterValues": {},
+                                "createdTime": "2022-08-04T06:54:09.2517473Z",
+                                "changedTime": "2022-08-05T06:27:24.4525024Z",
+                                "api": {
+                                    "name": "office365",
+                                    "displayName": "Office 365 Outlook",
+                                    "description": "Microsoft Office 365 is a cloud-based service that is designed to help meet your organization's needs for robust security, reliability, and user productivity.",
+                                    "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1591/1.0.1591.2961/office365/icon.png",
+                                    "brandColor": "#0078D4",
+                                    "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/southindia/managedApis/office365')]",
+                                    "type": "Microsoft.Web/locations/managedApis"
+                                },
+                                "testLinks": [
+                                    {
+                                        "requestUri": "[concat('https://management.azure.com:443/subscriptions/',parameters('subscription_id'),'/resourceGroups/', parameters('resource_group_name'), '/providers/Microsoft.Web/connections/', parameters('connections_office365_2_name'), '/extensions/proxy/testconnection?api-version=2016-06-01')]",
+                                        "method": "get"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "type": "Microsoft.Web/connections",
+                            "apiVersion": "2016-06-01",
+                            "name": "[parameters('connections_servicebus_name')]",
+                            "location": "southindia",
+                            "kind": "V1",
+                            "properties": {
+                                "displayName": "queuebus",
+                                "statuses": [
+                                    {
+                                        "status": "Connected"
+                                    }
+                                ],
+                                "customParameterValues": {},
+                                "createdTime": "2022-08-04T09:25:29.797003Z",
+                                "changedTime": "2022-08-04T09:25:29.797003Z",
+                                "api": {
+                                    "name": "[parameters('connections_servicebus_name')]",
+                                    "displayName": "Service Bus",
+                                    "description": "Connect to Azure Service Bus to send and receive messages. You can perform actions such as send to queue, send to topic, receive from queue, receive from subscription, etc.",
+                                    "iconUri": "[concat('https://connectoricons-prod.azureedge.net/releases/v1.0.1568/1.0.1568.2756/', parameters('connections_servicebus_name'), '/icon.png')]",
+                                    "brandColor": "#c4d5ff",
+                                    "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/southindia/managedApis/', parameters('connections_servicebus_name'))]",
+                                    "type": "Microsoft.Web/locations/managedApis"
+                                },
+                                "testLinks": []
+                            }
+                        },
+                        {
+                            "type": "Microsoft.ServiceBus/namespaces/AuthorizationRules",
+                            "apiVersion": "2022-01-01-preview",
+                            "name": "[concat(parameters('namespaces_optumhack_name'), '/RootManageSharedAccessKey')]",
+                            "location": "South India",
+                            "dependsOn": [
+                                "[resourceId('Microsoft.ServiceBus/namespaces', parameters('namespaces_optumhack_name'))]"
+                            ],
+                            "properties": {
+                                "rights": [
+                                    "Listen",
+                                    "Manage",
+                                    "Send"
+                                ]
+                            }
+                        },
+                        {
+                            "type": "Microsoft.ServiceBus/namespaces/networkRuleSets",
+                            "apiVersion": "2022-01-01-preview",
+                            "name": "[concat(parameters('namespaces_optumhack_name'), '/default')]",
+                            "location": "South India",
+                            "dependsOn": [
+                                "[resourceId('Microsoft.ServiceBus/namespaces', parameters('namespaces_optumhack_name'))]"
+                            ],
+                            "properties": {
+                                "publicNetworkAccess": "Enabled",
+                                "defaultAction": "Allow",
+                                "virtualNetworkRules": [],
+                                "ipRules": []
+                            }
+                        },
+                        {
+                            "type": "Microsoft.ServiceBus/namespaces/queues",
+                            "apiVersion": "2022-01-01-preview",
+                            "name": "[concat(parameters('namespaces_optumhack_name'), '/inboundqueue')]",
+                            "location": "southindia",
+                            "dependsOn": [
+                                "[resourceId('Microsoft.ServiceBus/namespaces', parameters('namespaces_optumhack_name'))]"
+                            ],
+                            "properties": {
+                                "maxMessageSizeInKilobytes": 256,
+                                "lockDuration": "PT30S",
+                                "maxSizeInMegabytes": 1024,
+                                "requiresDuplicateDetection": false,
+                                "requiresSession": false,
+                                "defaultMessageTimeToLive": "P14D",
+                                "deadLetteringOnMessageExpiration": false,
+                                "enableBatchedOperations": true,
+                                "duplicateDetectionHistoryTimeWindow": "PT10M",
+                                "maxDeliveryCount": 10,
+                                "status": "Active",
+                                "autoDeleteOnIdle": "P10675199DT2H48M5.4775807S",
+                                "enablePartitioning": false,
+                                "enableExpress": false
+                            }
+                        },
+                        {
+                            "type": "Microsoft.Logic/workflows",
+                            "apiVersion": "2017-07-01",
+                            "name": "[parameters('workflows_optumemailreader_name')]",
+                            "location": "southindia",
+                            "dependsOn": [
+                                "[resourceId('Microsoft.Web/connections', parameters('connections_azureblob_name'))]",
+                                "[resourceId('Microsoft.Web/connections', parameters('connections_documentdb_name'))]",
+                                "[resourceId('Microsoft.Web/connections', parameters('connections_office365_2_name'))]",
+                                "[resourceId('Microsoft.Web/connections', parameters('connections_servicebus_name'))]"
+                            ],
+                            "properties": {
+                                "state": "Enabled",
+                                "definition": {
+                                    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+                                    "contentVersion": "1.0.0.0",
+                                    "parameters": {
+                                        "$connections": {
+                                            "defaultValue": {},
+                                            "type": "Object"
+                                        }
+                                    },
+                                    "triggers": {
+                                        "When_a_new_email_arrives": {
+                                            "recurrence": {
+                                                "frequency": "Minute",
+                                                "interval": 3
+                                            },
+                                            "evaluatedRecurrence": {
+                                                "frequency": "Minute",
+                                                "interval": 3
+                                            },
+                                            "splitOn": "@triggerBody()?['value']",
+                                            "type": "ApiConnection",
+                                            "inputs": {
+                                                "host": {
+                                                    "connection": {
+                                                        "name": "@parameters('$connections')['office365_1']['connectionId']"
+                                                    }
+                                                },
+                                                "method": "get",
+                                                "path": "/Mail/OnNewEmail",
+                                                "queries": {
+                                                    "folderPath": "Inbox",
+                                                    "importance": "Normal",
+                                                    "includeAttachments": true
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "actions": {
+                                        "Fetch_Policy_from_email": {
+                                            "runAfter": {},
+                                            "type": "ApiConnection",
+                                            "inputs": {
+                                                "host": {
+                                                    "connection": {
+                                                        "name": "@parameters('$connections')['documentdb']['connectionId']"
+                                                    }
+                                                },
+                                                "method": "get",
+                                                "path": "/v5/cosmosdb/@{encodeURIComponent('AccountNameFromSettings')}/dbs/@{encodeURIComponent('RMDB')}/colls/@{encodeURIComponent('Policy')}/query",
+                                                "queries": {
+                                                    "queryText": "Select * FROM c WHERE c.email='@{triggerBody()?['From']}'"
+                                                }
+                                            }
+                                        },
+                                        "For_each": {
+                                            "foreach": "@body('Fetch_Policy_from_email')?['value']",
+                                            "actions": {
+                                                "Condition": {
+                                                    "actions": {
+                                                        "Create_blob_email_body": {
+                                                            "runAfter": {
+                                                                "Set_file_name_variable_": [
+                                                                    "Succeeded"
+                                                                ]
+                                                            },
+                                                            "type": "ApiConnection",
+                                                            "inputs": {
+                                                                "body": "@triggerBody()?['Body']",
+                                                                "headers": {
+                                                                    "ReadFileMetadataFromServer": true
+                                                                },
+                                                                "host": {
+                                                                    "connection": {
+                                                                        "name": "@parameters('$connections')['azureblob']['connectionId']"
+                                                                    }
+                                                                },
+                                                                "method": "post",
+                                                                "path": "/v2/datasets/@{encodeURIComponent(encodeURIComponent('AccountNameFromSettings'))}/files",
+                                                                "queries": {
+                                                                    "folderPath": "@{items('For_each')?['PolicyNo']}/inbound/",
+                                                                    "name": "@{variables('fileName')}.txt",
+                                                                    "queryParametersSingleEncoded": true
+                                                                }
+                                                            },
+                                                            "runtimeConfiguration": {
+                                                                "contentTransfer": {
+                                                                    "transferMode": "Chunked"
+                                                                }
+                                                            }
+                                                        },
+                                                        "For_each_Attachment": {
+                                                            "foreach": "@triggerBody()?['Attachments']",
+                                                            "actions": {
+                                                                "Create_blob_for_Email_Attachments": {
+                                                                    "runAfter": {
+                                                                        "Set_variable": [
+                                                                            "Succeeded"
+                                                                        ]
+                                                                    },
+                                                                    "type": "ApiConnection",
+                                                                    "inputs": {
+                                                                        "body": "@base64ToBinary(items('For_each_Attachment')?['ContentBytes'])",
+                                                                        "headers": {
+                                                                            "ReadFileMetadataFromServer": true
+                                                                        },
+                                                                        "host": {
+                                                                            "connection": {
+                                                                                "name": "@parameters('$connections')['azureblob']['connectionId']"
+                                                                            }
+                                                                        },
+                                                                        "method": "post",
+                                                                        "path": "/v2/datasets/@{encodeURIComponent(encodeURIComponent('AccountNameFromSettings'))}/files",
+                                                                        "queries": {
+                                                                            "folderPath": "@{items('For_each')?['PolicyNo']}/inbound/",
+                                                                            "name": "@variables('fileName')",
+                                                                            "queryParametersSingleEncoded": true
+                                                                        }
+                                                                    },
+                                                                    "runtimeConfiguration": {
+                                                                        "contentTransfer": {
+                                                                            "transferMode": "Chunked"
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "Send_attachment_message": {
+                                                                    "runAfter": {
+                                                                        "Create_blob_for_Email_Attachments": [
+                                                                            "Succeeded"
+                                                                        ]
+                                                                    },
+                                                                    "type": "ApiConnection",
+                                                                    "inputs": {
+                                                                        "body": {
+                                                                            "ContentData": "@{base64(concat('{','\n','\"sender\":\"',triggerBody()?['From'],'\",','\n','\"policyno\":\"',items('For_each')?['PolicyNo'],'\",','\n','\"filepath\":\"',body('Create_blob_for_Email_Attachments')?['Path'],'\",','\n','\"filename\":\"',items('For_each_Attachment')?['Name'],'\"','\n','}'))}"
+                                                                        },
+                                                                        "host": {
+                                                                            "connection": {
+                                                                                "name": "@parameters('$connections')['servicebus']['connectionId']"
+                                                                            }
+                                                                        },
+                                                                        "method": "post",
+                                                                        "path": "/@{encodeURIComponent(encodeURIComponent('inboundqueue'))}/messages",
+                                                                        "queries": {
+                                                                            "systemProperties": "None"
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "Set_variable": {
+                                                                    "runAfter": {},
+                                                                    "type": "SetVariable",
+                                                                    "inputs": {
+                                                                        "name": "fileName",
+                                                                        "value": "@{guid()}"
+                                                                    }
+                                                                }
+                                                            },
+                                                            "runAfter": {},
+                                                            "type": "Foreach"
+                                                        },
+                                                        "Send_message": {
+                                                            "runAfter": {
+                                                                "Create_blob_email_body": [
+                                                                    "Succeeded"
+                                                                ]
+                                                            },
+                                                            "type": "ApiConnection",
+                                                            "inputs": {
+                                                                "body": {
+                                                                    "ContentData": "@{base64(concat('{','\n','\"sender\":\"',triggerBody()?['From'],'\",','\n','\"policyno\":\"',items('For_each')?['PolicyNo'],'\",','\n','\"filepath\":\"',body('Create_blob_email_body')?['Path'],'\",','\n','\"filename\":\"',variables('fileName'),'.txt\",','\n','\"firstName\":\"',items('For_each')?['FirstName'],'\"','\n','}'))}"
+                                                                },
+                                                                "host": {
+                                                                    "connection": {
+                                                                        "name": "@parameters('$connections')['servicebus']['connectionId']"
+                                                                    }
+                                                                },
+                                                                "method": "post",
+                                                                "path": "/@{encodeURIComponent(encodeURIComponent('inboundqueue'))}/messages",
+                                                                "queries": {
+                                                                    "systemProperties": "None"
+                                                                }
+                                                            }
+                                                        },
+                                                        "Set_file_name_variable_": {
+                                                            "runAfter": {
+                                                                "For_each_Attachment": [
+                                                                    "Succeeded"
+                                                                ]
+                                                            },
+                                                            "type": "SetVariable",
+                                                            "inputs": {
+                                                                "name": "fileName",
+                                                                "value": "@{guid()}"
+                                                            }
+                                                        }
+                                                    },
+                                                    "runAfter": {},
+                                                    "expression": {
+                                                        "and": [
+                                                            {
+                                                                "not": {
+                                                                    "equals": [
+                                                                        "@items('For_each')",
+                                                                        ""
+                                                                    ]
+                                                                }
+                                                            }
+                                                        ]
+                                                    },
+                                                    "type": "If"
+                                                }
+                                            },
+                                            "runAfter": {
+                                                "Initialize_variable": [
+                                                    "Succeeded"
+                                                ]
+                                            },
+                                            "type": "Foreach"
+                                        },
+                                        "Initialize_variable": {
+                                            "runAfter": {
+                                                "Fetch_Policy_from_email": [
+                                                    "Succeeded"
+                                                ]
+                                            },
+                                            "type": "InitializeVariable",
+                                            "inputs": {
+                                                "variables": [
+                                                    {
+                                                        "name": "fileName",
+                                                        "type": "string"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "outputs": {}
+                                },
+                                "parameters": {
+                                    "$connections": {
+                                        "value": {
+                                            "azureblob": {
+                                                "connectionId": "[resourceId('Microsoft.Web/connections', parameters('connections_azureblob_name'))]",
+                                                "connectionName": "azureblob",
+                                                "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/southindia/managedApis/azureblob')]"
+                                            },
+                                            "documentdb": {
+                                                "connectionId": "[resourceId('Microsoft.Web/connections', parameters('connections_documentdb_name'))]",
+                                                "connectionName": "documentdb",
+                                                "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/southindia/managedApis/documentdb')]"
+                                            },
+                                            "office365_1": {
+                                                "connectionId": "[resourceId('Microsoft.Web/connections', parameters('connections_office365_2_name'))]",
+                                                "connectionName": "office365-2",
+                                                "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/southindia/managedApis/office365')]"
+                                            },
+                                            "servicebus": {
+                                                "connectionId": "[resourceId('Microsoft.Web/connections', parameters('connections_servicebus_name'))]",
+                                                "connectionName": "servicebus",
+                                                "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/southindia/managedApis/servicebus')]"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "type": "Microsoft.Logic/workflows",
+                            "apiVersion": "2017-07-01",
+                            "name": "[parameters('workflows_optumemailprocess_name')]",
+                            "location": "southindia",
+                            "dependsOn": [
+                                "[resourceId('Microsoft.Web/connections', parameters('connections_azureblob_name'))]",
+                                "[resourceId('Microsoft.Web/connections', parameters('connections_cognitiveservicestextanalytics_name'))]",
+                                "[resourceId('Microsoft.Web/connections', parameters('connections_conversionservice_name'))]",
+                                "[resourceId('Microsoft.Web/connections', parameters('connections_documentdb_name'))]",
+                                "[resourceId('Microsoft.Web/connections', parameters('connections_formrecognizer_name'))]",
+                                "[resourceId('Microsoft.Web/connections', parameters('connections_office365_2_name'))]",
+                                "[resourceId('Microsoft.Web/connections', parameters('connections_servicebus_name'))]"
+                            ],
+                            "properties": {
+                                "state": "Enabled",
+                                "definition": {
+                                    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+                                    "contentVersion": "1.0.0.0",
+                                    "parameters": {
+                                        "$connections": {
+                                            "defaultValue": {},
+                                            "type": "Object"
+                                        }
+                                    },
+                                    "triggers": {
+                                        "When_a_message_is_received_in_a_queue_(auto-complete)": {
+                                            "recurrence": {
+                                                "frequency": "Minute",
+                                                "interval": 3
+                                            },
+                                            "evaluatedRecurrence": {
+                                                "frequency": "Minute",
+                                                "interval": 3
+                                            },
+                                            "type": "ApiConnection",
+                                            "inputs": {
+                                                "host": {
+                                                    "connection": {
+                                                        "name": "@parameters('$connections')['servicebus']['connectionId']"
+                                                    }
+                                                },
+                                                "method": "get",
+                                                "path": "/@{encodeURIComponent(encodeURIComponent('inboundqueue'))}/messages/head",
+                                                "queries": {
+                                                    "queueType": "Main"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "actions": {
+                                        "Compose_bus_message": {
+                                            "runAfter": {},
+                                            "type": "Compose",
+                                            "inputs": "@decodeBase64(triggerBody()?['ContentData'])"
+                                        },
+                                        "Condition": {
+                                            "actions": {
+                                                "Analyze_Layout": {
+                                                    "runAfter": {},
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": "@body('Read_file_content')",
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['formrecognizer']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "post",
+                                                        "path": "/v2.1/layout/analyze"
+                                                    }
+                                                },
+                                                "Key_Phrases_(V3.0)_2": {
+                                                    "runAfter": {
+                                                        "Analyze_Layout": [
+                                                            "Succeeded"
+                                                        ]
+                                                    },
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": {
+                                                            "documents": [
+                                                                {
+                                                                    "id": "@body('Parse_service_bus_message')?['filename']",
+                                                                    "text": "@{body('Analyze_Layout')?['analyzeResult']?['readResults']}"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['cognitiveservicestextanalytics']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "post",
+                                                        "path": "/text/analytics/v3.0/keyPhrases"
+                                                    }
+                                                },
+                                                "Set_variable": {
+                                                    "runAfter": {
+                                                        "Key_Phrases_(V3.0)_2": [
+                                                            "Succeeded"
+                                                        ]
+                                                    },
+                                                    "type": "SetVariable",
+                                                    "inputs": {
+                                                        "name": "extractedData",
+                                                        "value": {
+                                                            "PloicyNo": "@{body('Parse_service_bus_message')?['policyno']}",
+                                                            "id": "@{guid()}",
+                                                            "parseData": "",
+                                                            "sender": "@{body('Parse_service_bus_message')?['sender']}"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {
+                                                "Initialize_variable": [
+                                                    "Succeeded"
+                                                ]
+                                            },
+                                            "else": {
+                                                "actions": {
+                                                    "Html_to_text": {
+                                                        "runAfter": {},
+                                                        "type": "ApiConnection",
+                                                        "inputs": {
+                                                            "body": "<p>@{body('Read_file_content')}</p>",
+                                                            "host": {
+                                                                "connection": {
+                                                                    "name": "@parameters('$connections')['conversionservice']['connectionId']"
+                                                                }
+                                                            },
+                                                            "method": "post",
+                                                            "path": "/html2text"
+                                                        }
+                                                    },
+                                                    "Key_Phrases_(V3.0)": {
+                                                        "runAfter": {
+                                                            "Html_to_text": [
+                                                                "Succeeded"
+                                                            ]
+                                                        },
+                                                        "type": "ApiConnection",
+                                                        "inputs": {
+                                                            "body": {
+                                                                "documents": [
+                                                                    {
+                                                                        "id": "@body('Parse_service_bus_message')?['filename']",
+                                                                        "text": "@body('Html_to_text')"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            "host": {
+                                                                "connection": {
+                                                                    "name": "@parameters('$connections')['cognitiveservicestextanalytics']['connectionId']"
+                                                                }
+                                                            },
+                                                            "method": "post",
+                                                            "path": "/text/analytics/v3.0/keyPhrases"
+                                                        }
+                                                    },
+                                                    "Set_variable_2": {
+                                                        "runAfter": {
+                                                            "Key_Phrases_(V3.0)": [
+                                                                "Succeeded"
+                                                            ]
+                                                        },
+                                                        "type": "SetVariable",
+                                                        "inputs": {
+                                                            "name": "extractedData",
+                                                            "value": {
+                                                                "PloicyNo": "@{body('Parse_service_bus_message')?['policyno']}",
+                                                                "id": "@{guid()}",
+                                                                "parseData": "",
+                                                                "sender": "@{body('Parse_service_bus_message')?['sender']}"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "expression": {
+                                                "and": [
+                                                    {
+                                                        "not": {
+                                                            "endsWith": [
+                                                                "@body('Parse_service_bus_message')?['filename']",
+                                                                ".txt"
+                                                            ]
+                                                        }
+                                                    }
+                                                ]
+                                            },
+                                            "type": "If"
+                                        },
+                                        "Initialize_variable": {
+                                            "runAfter": {
+                                                "Read_file_content": [
+                                                    "Succeeded"
+                                                ]
+                                            },
+                                            "type": "InitializeVariable",
+                                            "inputs": {
+                                                "variables": [
+                                                    {
+                                                        "name": "extractedData",
+                                                        "type": "object"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        "Parse_service_bus_message": {
+                                            "runAfter": {
+                                                "Compose_bus_message": [
+                                                    "Succeeded"
+                                                ]
+                                            },
+                                            "type": "ParseJson",
+                                            "inputs": {
+                                                "content": "@outputs('Compose_bus_message')",
+                                                "schema": {
+                                                    "properties": {
+                                                        "filename": {
+                                                            "type": "string"
+                                                        },
+                                                        "filepath": {
+                                                            "type": "string"
+                                                        },
+                                                        "firstName": {
+                                                            "type": "string"
+                                                        },
+                                                        "policyno": {
+                                                            "type": "string"
+                                                        },
+                                                        "sender": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            }
+                                        },
+                                        "Read_file_content": {
+                                            "runAfter": {
+                                                "Parse_service_bus_message": [
+                                                    "Succeeded"
+                                                ]
+                                            },
+                                            "type": "ApiConnection",
+                                            "inputs": {
+                                                "host": {
+                                                    "connection": {
+                                                        "name": "@parameters('$connections')['azureblob']['connectionId']"
+                                                    }
+                                                },
+                                                "method": "get",
+                                                "path": "/v2/datasets/@{encodeURIComponent(encodeURIComponent('AccountNameFromSettings'))}/files/@{encodeURIComponent(encodeURIComponent(body('Parse_service_bus_message')?['filepath']))}/content",
+                                                "queries": {
+                                                    "inferContentType": true
+                                                }
+                                            }
+                                        },
+                                        "Send_an_email_notification_to_User": {
+                                            "runAfter": {
+                                                "Store_data_into_ClaimsDB": [
+                                                    "Succeeded"
+                                                ]
+                                            },
+                                            "type": "ApiConnection",
+                                            "inputs": {
+                                                "body": {
+                                                    "Body": "<p>Hello @{body('Parse_service_bus_message')?['firstName']},<br>\n<br>\nYour claim process for the policy number &nbsp;@{body('Parse_service_bus_message')?['policyno']}, is initiated with the shared details.<br>\n<br>\nIt is currently pending for review. we will let you know if there is any update.<br>\n<br>\nRegards,<br>\nPolicy Provider</p>",
+                                                    "Importance": "Normal",
+                                                    "Subject": "Policy process update, Policy No:@{body('Parse_service_bus_message')?['policyno']}",
+                                                    "To": "@body('Parse_service_bus_message')?['sender']"
+                                                },
+                                                "host": {
+                                                    "connection": {
+                                                        "name": "@parameters('$connections')['office365']['connectionId']"
+                                                    }
+                                                },
+                                                "method": "post",
+                                                "path": "/v2/Mail"
+                                            }
+                                        },
+                                        "Store_data_into_ClaimsDB": {
+                                            "runAfter": {
+                                                "Condition": [
+                                                    "Succeeded"
+                                                ]
+                                            },
+                                            "type": "ApiConnection",
+                                            "inputs": {
+                                                "body": "@variables('extractedData')",
+                                                "host": {
+                                                    "connection": {
+                                                        "name": "@parameters('$connections')['documentdb']['connectionId']"
+                                                    }
+                                                },
+                                                "method": "post",
+                                                "path": "/v2/cosmosdb/@{encodeURIComponent('AccountNameFromSettings')}/dbs/@{encodeURIComponent('RMDB')}/colls/@{encodeURIComponent('Claims')}/docs"
+                                            }
+                                        }
+                                    },
+                                    "outputs": {}
+                                },
+                                "parameters": {
+                                    "$connections": {
+                                        "value": {
+                                            "azureblob": {
+                                                "connectionId": "[resourceId('Microsoft.Web/connections', parameters('connections_azureblob_name'))]",
+                                                "connectionName": "azureblob",
+                                                "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/southindia/managedApis/azureblob')]"
+                                            },
+                                            "cognitiveservicestextanalytics": {
+                                                "connectionId": "[resourceId('Microsoft.Web/connections', parameters('connections_cognitiveservicestextanalytics_name'))]",
+                                                "connectionName": "cognitiveservicestextanalytics",
+                                                "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/southindia/managedApis/cognitiveservicestextanalytics')]"
+                                            },
+                                            "conversionservice": {
+                                                "connectionId": "[resourceId('Microsoft.Web/connections', parameters('connections_conversionservice_name'))]",
+                                                "connectionName": "conversionservice",
+                                                "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/southindia/managedApis/conversionservice')]"
+                                            },
+                                            "documentdb": {
+                                                "connectionId": "[resourceId('Microsoft.Web/connections', parameters('connections_documentdb_name'))]",
+                                                "connectionName": "documentdb",
+                                                "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/southindia/managedApis/documentdb')]"
+                                            },
+                                            "formrecognizer": {
+                                                "connectionId": "[resourceId('Microsoft.Web/connections', parameters('connections_formrecognizer_name'))]",
+                                                "connectionName": "formrecognizer",
+                                                "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/southindia/managedApis/formrecognizer')]"
+                                            },
+                                            "office365": {
+                                                "connectionId": "[resourceId('Microsoft.Web/connections', parameters('connections_office365_2_name'))]",
+                                                "connectionName": "office365-2",
+                                                "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/southindia/managedApis/office365')]"
+                                            },
+                                            "servicebus": {
+                                                "connectionId": "[resourceId('Microsoft.Web/connections', parameters('connections_servicebus_name'))]",
+                                                "connectionName": "servicebus",
+                                                "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/southindia/managedApis/servicebus')]"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+
+    ]
+}
