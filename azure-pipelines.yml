@@ -6,7 +6,7 @@
 trigger:
 - main
 
-pool: Self-Hosted
+pool: 'Azure Pipelines'
 #  vmImage: ubuntu-latest
 
 steps:
