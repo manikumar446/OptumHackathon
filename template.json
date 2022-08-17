@@ -107,7 +107,7 @@
             "name": "[parameters('accounts_optumformrecognizer_name')]",
             "location": "[parameters('location')]",
             "sku": {
-                "name": "F0"
+                "name": "S"
             },
             "kind": "FormRecognizer",
             "identity": {
