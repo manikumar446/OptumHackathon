@@ -85,6 +85,9 @@
             "apiVersion": "2021-04-01",
             "name": "nestedDeployment",
             "resourceGroup": "[parameters('resource_group_name')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Resources/resourceGroups/', parameters('resource_group_name'))]"
+            ],
             "properties": {
                 "mode": "Incremental",
                 "template": {
