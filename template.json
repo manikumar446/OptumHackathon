@@ -72,7 +72,11 @@
          "metadata": {
            "description": "Location for all resources."
          }
-       }
+       },
+       "base_path": {
+             "type":"String",
+             "defaultValue" : "https://management.azure.com:443/subscriptions/"
+         }
     },
     "variables": {},
     "resources": [
@@ -80,7 +84,7 @@
             "type": "Microsoft.CognitiveServices/accounts",
             "apiVersion": "2022-03-01",
             "name": "[parameters('accounts_optumcognitiveservice_name')]",
-            "location": "centralindia",
+            "location": "[parameters('location')]",
             "sku": {
                 "name": "F0"
             },
@@ -160,7 +164,7 @@
                 },
                 "testLinks": [
                     {
-                        "requestUri": "[concat('https://management.azure.com:443/subscriptions/',parameters('subscription_id'),'/resourceGroups/', parameters('resource_group_name'), '/providers/Microsoft.Web/connections/', parameters('connections_azureblob_name'), '/extensions/proxy/testconnection?api-version=2016-06-01')]",
+                        "requestUri": "[concat(parameters('base_path'),parameters('subscription_id'),'/resourceGroups/', parameters('resource_group_name'), '/providers/Microsoft.Web/connections/', parameters('connections_azureblob_name'), '/extensions/proxy/testconnection?api-version=2016-06-01')]",
                         "method": "get"
                     }
                 ]
@@ -198,7 +202,7 @@
             "type": "Microsoft.Web/connections",
             "apiVersion": "2016-06-01",
             "name": "[parameters('connections_conversionservice_name')]",
-            "location": "southindia",
+            "location": "[parameters('location')]",
             "kind": "V1",
             "properties": {
                 "displayName": "Content Conversion",
@@ -250,7 +254,7 @@
                 },
                 "testLinks": [
                     {
-                        "requestUri": "[concat('https://management.azure.com:443/subscriptions/',parameters('subscription_id'),'/resourceGroups/', parameters('resource_group_name'), '/providers/Microsoft.Web/connections/', parameters('connections_documentdb_name'), '/extensions/proxy/testConnection?api-version=2016-06-01')]",
+                        "requestUri": "[concat(parameters('base_path'),parameters('subscription_id'),'/resourceGroups/', parameters('resource_group_name'), '/providers/Microsoft.Web/connections/', parameters('connections_documentdb_name'), '/extensions/proxy/testConnection?api-version=2016-06-01')]",
                         "method": "get"
                     }
                 ]
@@ -315,7 +319,7 @@
                 },
                 "testLinks": [
                     {
-                        "requestUri": "[concat('https://management.azure.com:443/subscriptions/',parameters('subscription_id'), '/resourceGroups/', parameters('resource_group_name'), '/providers/Microsoft.Web/connections/', parameters('connections_office365_name'), '/extensions/proxy/testconnection?api-version=2016-06-01')]",
+                        "requestUri": "[concat(parameters('base_path'),parameters('subscription_id'), '/resourceGroups/', parameters('resource_group_name'), '/providers/Microsoft.Web/connections/', parameters('connections_office365_name'), '/extensions/proxy/testconnection?api-version=2016-06-01')]",
                         "method": "get"
                     }
                 ]
@@ -350,7 +354,7 @@
                 },
                 "testLinks": [
                     {
-                        "requestUri": "[concat('https://management.azure.com:443/subscriptions/',parameters('subscription_id'),'/resourceGroups/', parameters('resource_group_name'), '/providers/Microsoft.Web/connections/', parameters('connections_office365_1_name'), '/extensions/proxy/testconnection?api-version=2016-06-01')]",
+                        "requestUri": "[concat(parameters('base_path'),parameters('subscription_id'),'/resourceGroups/', parameters('resource_group_name'), '/providers/Microsoft.Web/connections/', parameters('connections_office365_1_name'), '/extensions/proxy/testconnection?api-version=2016-06-01')]",
                         "method": "get"
                     }
                 ]
@@ -384,7 +388,7 @@
                 },
                 "testLinks": [
                     {
-                        "requestUri": "[concat('https://management.azure.com:443/subscriptions/',parameters('subscription_id'),'/resourceGroups/', parameters('resource_group_name'), '/providers/Microsoft.Web/connections/', parameters('connections_office365_2_name'), '/extensions/proxy/testconnection?api-version=2016-06-01')]",
+                        "requestUri": "[concat(parameters('base_path'),parameters('subscription_id'),'/resourceGroups/', parameters('resource_group_name'), '/providers/Microsoft.Web/connections/', parameters('connections_office365_2_name'), '/extensions/proxy/testconnection?api-version=2016-06-01')]",
                         "method": "get"
                     }
                 ]
