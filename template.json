@@ -51,7 +51,7 @@
             "type": "String"
         },
         "connections_cognitiveservicestextanalytics_name": {
-            "defaultValue": "cognitiveservicestextanalytics111",
+            "defaultValue": "cognitiveservicestextanalytics",
             "type": "String"
         },
         "accounts_optumcognitiveservice_name": {
