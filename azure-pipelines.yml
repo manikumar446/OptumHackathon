@@ -16,7 +16,7 @@ steps:
     azureResourceManagerConnection: 'OptumHackathonPipelineConnection'
     subscriptionId: '5f9408a9-1889-41f0-8c06-f3c880e19c6a'
     action: 'Create Or Update Resource Group'
-    resourceGroupName: 'OptumHackathon-rg'
+    resourceGroupName: 'OptumHackMani-rg'
     location: 'South India'
     templateLocation: 'URL of the file'
     csmFileLink: 'https://raw.githubusercontent.com/manikumar446/OptumHackathon/main/template.json'
