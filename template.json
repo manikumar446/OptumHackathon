@@ -3,59 +3,59 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "connections_azureblob_name": {
-            "defaultValue": "azureblob111",
+            "defaultValue": "azureblob222",
             "type": "String"
         },
         "connections_office365_name": {
-            "defaultValue": "office365111",
+            "defaultValue": "office365222",
             "type": "String"
         },
         "connections_documentdb_name": {
-            "defaultValue": "documentdb111",
+            "defaultValue": "documentdb222",
             "type": "String"
         },
         "connections_servicebus_name": {
-            "defaultValue": "servicebus111",
+            "defaultValue": "servicebus222",
             "type": "String"
         },
         "connections_office365_1_name": {
-            "defaultValue": "office365-1111",
+            "defaultValue": "office365-1222",
             "type": "String"
         },
         "connections_office365_2_name": {
-            "defaultValue": "office365-2111",
+            "defaultValue": "office365-2222",
             "type": "String"
         },
         "connections_formrecognizer_name": {
-            "defaultValue": "formrecognizer111",
+            "defaultValue": "formrecognizer222",
             "type": "String"
         },
         "namespaces_optumhack_name": {
-            "defaultValue": "optumhack111",
+            "defaultValue": "optumhack222",
             "type": "String"
         },
         "workflows_optumemailreader_name": {
-            "defaultValue": "optumemailreader111",
+            "defaultValue": "optumemailreader222",
             "type": "String"
         },
         "workflows_optumemailprocess_name": {
-            "defaultValue": "optumemailprocess111",
+            "defaultValue": "optumemailprocess222",
             "type": "String"
         },
         "connections_conversionservice_name": {
-            "defaultValue": "conversionservice111",
+            "defaultValue": "conversionservice222",
             "type": "String"
         },
         "accounts_optumformrecognizer_name": {
-            "defaultValue": "optumformrecognizer111",
+            "defaultValue": "optumformrecognizer222",
             "type": "String"
         },
         "connections_cognitiveservicestextanalytics_name": {
-            "defaultValue": "cognitiveservicestextanalytics111",
+            "defaultValue": "cognitiveservicestextanalytics222",
             "type": "String"
         },
         "accounts_optumcognitiveservice_name": {
-            "defaultValue": "optumcognitiveservice111",
+            "defaultValue": "optumcognitiveservice222",
             "type": "String"
         },
         "subscription_id": {
