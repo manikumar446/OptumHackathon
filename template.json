@@ -63,7 +63,7 @@
             "type": "String"
         },
         "resource_group_name": {
-            "defaultValue": "OptumHack111",
+            "defaultValue": "OptumHack446",
             "type": "String"
         },
         "resource_group_location": {
