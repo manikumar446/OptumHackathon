@@ -51,7 +51,7 @@
             "type": "String"
         },
         "connections_cognitiveservicestextanalytics_name": {
-            "defaultValue": "cognitiveservicestextanalytics",
+            "defaultValue": "cognitiveservicestextanalytics111",
             "type": "String"
         },
         "accounts_optumcognitiveservice_name": {
@@ -86,7 +86,7 @@
             "name": "[parameters('accounts_optumcognitiveservice_name')]",
             "location": "[parameters('location')]",
             "sku": {
-                "name": "F0"
+                "name": "S"
             },
             "kind": "TextAnalytics",
             "identity": {
