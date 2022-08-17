@@ -67,8 +67,8 @@
             "type": "String"
         },
         "location": {
-            "type": "string",
-            "defaultValue": "Central India",
+            "type": "String",
+            "defaultValue": "[resourceGroup().location]",
             "metadata": {
                 "description": "Location for all resources."
             }
@@ -76,10 +76,6 @@
         "base_path": {
             "type": "String",
             "defaultValue": "https://management.azure.com:443/subscriptions/"
-        },
-        "location_central_india": {
-            "type": "string",
-            "defaultValue": "Central India"
         }
     },
     "variables": {},
@@ -88,7 +84,7 @@
             "type": "Microsoft.CognitiveServices/accounts",
             "apiVersion": "2022-03-01",
             "name": "[parameters('accounts_optumcognitiveservice_name')]",
-            "location": "[parameters('location_central_india')]",
+            "location": "[parameters('location')]",
             "sku": {
                 "name": "F0"
             },
@@ -109,7 +105,7 @@
             "type": "Microsoft.CognitiveServices/accounts",
             "apiVersion": "2022-03-01",
             "name": "[parameters('accounts_optumformrecognizer_name')]",
-            "location": "[parameters('location_central_india')]",
+            "location": "[parameters('location')]",
             "sku": {
                 "name": "F0"
             },
