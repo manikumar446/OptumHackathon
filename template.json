@@ -65,11 +65,17 @@
         "resource_group_name": {
             "defaultValue": "OptumHackathon-rg",
             "type": "String"
-        }
+        },
+        "location": {
+         "type": "string",
+         "defaultValue": "[resourceGroup().location]",
+         "metadata": {
+           "description": "Location for all resources."
+         }
+       }
     },
     "variables": {},
     "resources": [
-
         {
             "type": "Microsoft.CognitiveServices/accounts",
             "apiVersion": "2022-03-01",
@@ -86,9 +92,7 @@
                 "apiProperties": {},
                 "customSubDomainName": "[parameters('accounts_optumcognitiveservice_name')]",
                 "networkAcls": {
-                    "defaultAction": "Allow",
-                    "virtualNetworkRules": [],
-                    "ipRules": []
+                    "defaultAction": "Allow"
                 },
                 "publicNetworkAccess": "Enabled"
             }
@@ -97,7 +101,7 @@
             "type": "Microsoft.CognitiveServices/accounts",
             "apiVersion": "2022-03-01",
             "name": "[parameters('accounts_optumformrecognizer_name')]",
-            "location": "centralindia",
+            "location": "[parameters('location')]",
             "sku": {
                 "name": "F0"
             },
@@ -108,9 +112,7 @@
             "properties": {
                 "customSubDomainName": "[parameters('accounts_optumformrecognizer_name')]",
                 "networkAcls": {
-                    "defaultAction": "Allow",
-                    "virtualNetworkRules": [],
-                    "ipRules": []
+                    "defaultAction": "Allow"
                 },
                 "publicNetworkAccess": "Enabled"
             }
@@ -119,7 +121,7 @@
             "type": "Microsoft.ServiceBus/namespaces",
             "apiVersion": "2022-01-01-preview",
             "name": "[parameters('namespaces_optumhack_name')]",
-            "location": "South India",
+            "location": "[parameters('location')]",
             "sku": {
                 "name": "Basic",
                 "tier": "Basic"
@@ -135,7 +137,7 @@
             "type": "Microsoft.Web/connections",
             "apiVersion": "2016-06-01",
             "name": "[parameters('connections_azureblob_name')]",
-            "location": "southindia",
+            "location": "[parameters('location')]",
             "kind": "V1",
             "properties": {
                 "displayName": "optumblob",
@@ -168,7 +170,7 @@
             "type": "Microsoft.Web/connections",
             "apiVersion": "2016-06-01",
             "name": "[parameters('connections_cognitiveservicestextanalytics_name')]",
-            "location": "southindia",
+            "location": "[parameters('location')]",
             "kind": "V1",
             "properties": {
                 "displayName": "optumcognitiveconn",
@@ -225,7 +227,7 @@
             "type": "Microsoft.Web/connections",
             "apiVersion": "2016-06-01",
             "name": "[parameters('connections_documentdb_name')]",
-            "location": "southindia",
+            "location": "[parameters('location')]",
             "kind": "V1",
             "properties": {
                 "displayName": "claimCon",
@@ -258,7 +260,7 @@
             "type": "Microsoft.Web/connections",
             "apiVersion": "2016-06-01",
             "name": "[parameters('connections_formrecognizer_name')]",
-            "location": "southindia",
+            "location": "[parameters('location')]",
             "kind": "V1",
             "properties": {
                 "displayName": "[concat('optum', parameters('connections_formrecognizer_name'), 'conn')]",
@@ -289,7 +291,7 @@
             "type": "Microsoft.Web/connections",
             "apiVersion": "2016-06-01",
             "name": "[parameters('connections_office365_name')]",
-            "location": "southindia",
+            "location": "[parameters('location')]",
             "kind": "V1",
             "properties": {
                 "displayName": "dheeraj.swami@optum.com",
@@ -323,15 +325,14 @@
             "type": "Microsoft.Web/connections",
             "apiVersion": "2016-06-01",
             "name": "[parameters('connections_office365_1_name')]",
-            "location": "southindia",
+            "location": "[parameters('location')]",
             "kind": "V1",
             "properties": {
                 "displayName": "Office 365 Outlook",
                 "statuses": [
                     {
                         "status": "Error",
-                        "target": "token",
-                        "error": {}
+                        "target": "token"
                     }
                 ],
                 "customParameterValues": {},
@@ -359,7 +360,7 @@
             "type": "Microsoft.Web/connections",
             "apiVersion": "2016-06-01",
             "name": "[parameters('connections_office365_2_name')]",
-            "location": "southindia",
+            "location": "[parameters('location')]",
             "kind": "V1",
             "properties": {
                 "displayName": "boora.brahmmam@optum.com",
@@ -393,7 +394,7 @@
             "type": "Microsoft.Web/connections",
             "apiVersion": "2016-06-01",
             "name": "[parameters('connections_servicebus_name')]",
-            "location": "southindia",
+            "location": "[parameters('location')]",
             "kind": "V1",
             "properties": {
                 "displayName": "queuebus",
@@ -421,7 +422,7 @@
             "type": "Microsoft.ServiceBus/namespaces/AuthorizationRules",
             "apiVersion": "2022-01-01-preview",
             "name": "[concat(parameters('namespaces_optumhack_name'), '/RootManageSharedAccessKey')]",
-            "location": "South India",
+            "location": "[parameters('location')]",
             "dependsOn": [
                 "[resourceId('Microsoft.ServiceBus/namespaces', parameters('namespaces_optumhack_name'))]"
             ],
@@ -437,22 +438,20 @@
             "type": "Microsoft.ServiceBus/namespaces/networkRuleSets",
             "apiVersion": "2022-01-01-preview",
             "name": "[concat(parameters('namespaces_optumhack_name'), '/default')]",
-            "location": "South India",
+            "location": "[parameters('location')]",
             "dependsOn": [
                 "[resourceId('Microsoft.ServiceBus/namespaces', parameters('namespaces_optumhack_name'))]"
             ],
             "properties": {
                 "publicNetworkAccess": "Enabled",
-                "defaultAction": "Allow",
-                "virtualNetworkRules": [],
-                "ipRules": []
+                "defaultAction": "Allow"
             }
         },
         {
             "type": "Microsoft.ServiceBus/namespaces/queues",
             "apiVersion": "2022-01-01-preview",
             "name": "[concat(parameters('namespaces_optumhack_name'), '/inboundqueue')]",
-            "location": "southindia",
+            "location": "[parameters('location')]",
             "dependsOn": [
                 "[resourceId('Microsoft.ServiceBus/namespaces', parameters('namespaces_optumhack_name'))]"
             ],
@@ -477,7 +476,7 @@
             "type": "Microsoft.Logic/workflows",
             "apiVersion": "2017-07-01",
             "name": "[parameters('workflows_optumemailreader_name')]",
-            "location": "southindia",
+            "location": "[parameters('location')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Web/connections', parameters('connections_azureblob_name'))]",
                 "[resourceId('Microsoft.Web/connections', parameters('connections_documentdb_name'))]",
@@ -755,7 +754,7 @@
             "type": "Microsoft.Logic/workflows",
             "apiVersion": "2017-07-01",
             "name": "[parameters('workflows_optumemailprocess_name')]",
-            "location": "southindia",
+            "location": "[parameters('location')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Web/connections', parameters('connections_azureblob_name'))]",
                 "[resourceId('Microsoft.Web/connections', parameters('connections_cognitiveservicestextanalytics_name'))]",
@@ -860,7 +859,6 @@
                                         "value": {
                                             "PloicyNo": "@{body('Parse_service_bus_message')?['policyno']}",
                                             "id": "@{guid()}",
-                                            "parseData": "",
                                             "sender": "@{body('Parse_service_bus_message')?['sender']}"
                                         }
                                     }
@@ -924,7 +922,6 @@
                                             "value": {
                                                 "PloicyNo": "@{body('Parse_service_bus_message')?['policyno']}",
                                                 "id": "@{guid()}",
-                                                "parseData": "",
                                                 "sender": "@{body('Parse_service_bus_message')?['sender']}"
                                             }
                                         }
