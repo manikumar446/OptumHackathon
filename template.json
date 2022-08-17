@@ -438,19 +438,19 @@
                 ]
             }
         },
-        {
-            "type": "Microsoft.ServiceBus/namespaces/networkRuleSets",
-            "apiVersion": "2022-01-01-preview",
-            "name": "[concat(parameters('namespaces_optumhack_name'), '/default')]",
-            "location": "[parameters('location')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.ServiceBus/namespaces', parameters('namespaces_optumhack_name'))]"
-            ],
-            "properties": {
-                "publicNetworkAccess": "Enabled",
-                "defaultAction": "Allow"
-            }
-        },
+        // {
+        //     "type": "Microsoft.ServiceBus/namespaces/networkRuleSets",
+        //     "apiVersion": "2022-01-01-preview",
+        //     "name": "[concat(parameters('namespaces_optumhack_name'), '/default')]",
+        //     "location": "[parameters('location')]",
+        //     "dependsOn": [
+        //         "[resourceId('Microsoft.ServiceBus/namespaces', parameters('namespaces_optumhack_name'))]"
+        //     ],
+        //     "properties": {
+        //         "publicNetworkAccess": "Enabled",
+        //         "defaultAction": "Allow"
+        //     }
+        // },
         {
             "type": "Microsoft.ServiceBus/namespaces/queues",
             "apiVersion": "2022-01-01-preview",
