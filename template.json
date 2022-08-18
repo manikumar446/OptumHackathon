@@ -4,7 +4,7 @@
     "parameters": {
         "counter": {
             "type": "int",
-            "defaultValue": 35
+            "defaultValue": 26
         },
         "connections_azureblob_name": {
             "defaultValue": "azureblob",
@@ -134,21 +134,27 @@
             "name": "[parameters('storageAccounts_optumhackathonstorage_name')]",
             "location": "centralindia",
             "sku": {
-                "name": "Standard_GRS",
+                "name": "Standard_LRS",
                 "tier": "Standard"
             },
-            "kind": "BlobStorage",
+            "kind": "StorageV2",
             "properties": {
+                "dnsEndpointType": "Standard",
+                "defaultToOAuthAuthentication": false,
+                "publicNetworkAccess": "Enabled",
+                "allowCrossTenantReplication": true,
                 "minimumTlsVersion": "TLS1_2",
                 "allowBlobPublicAccess": true,
-                // "networkAcls": {
-                //     "bypass": "AzureServices",
-                //     "virtualNetworkRules": [],
-                //     "ipRules": [],
-                //     "defaultAction": "Allow"
-                // },
+                "allowSharedKeyAccess": true,
+                "networkAcls": {
+                    "bypass": "AzureServices",
+                    "virtualNetworkRules": [],
+                    "ipRules": [],
+                    "defaultAction": "Allow"
+                },
                 "supportsHttpsTrafficOnly": true,
                 "encryption": {
+                    "requireInfrastructureEncryption": false,
                     "services": {
                         "file": {
                             "keyType": "Account",
@@ -513,10 +519,20 @@
                 "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_optumhackathonstorage_name'))]"
             ],
             "sku": {
-                "name": "Standard_GRS",
+                "name": "Standard_LRS",
                 "tier": "Standard"
             },
             "properties": {
+                "changeFeed": {
+                    "enabled": false
+                },
+                "restorePolicy": {
+                    "enabled": false
+                },
+                "containerDeleteRetentionPolicy": {
+                    "enabled": true,
+                    "days": 7
+                },
                 "cors": {
                     "corsRules": [
                         {
@@ -540,13 +556,35 @@
                             "allowedHeaders": [
                                 "*"
                             ]
+                        },
+                        {
+                            "allowedOrigins": [
+                                "*"
+                            ],
+                            "allowedMethods": [
+                                "GET",
+                                "HEAD",
+                                "MERGE",
+                                "POST",
+                                "PUT",
+                                "PATCH"
+                            ],
+                            "maxAgeInSeconds": 0,
+                            "exposedHeaders": [
+                                "*"
+                            ],
+                            "allowedHeaders": [
+                                "*"
+                            ]
                         }
                     ]
                 },
                 "deleteRetentionPolicy": {
                     "allowPermanentDelete": false,
-                    "enabled": false
-                }
+                    "enabled": true,
+                    "days": 7
+                },
+                "isVersioningEnabled": false
             }
         },
         {
