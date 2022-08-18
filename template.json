@@ -4,7 +4,7 @@
     "parameters": {
         "counter": {
             "type": "int",
-            "defaultValue": 29
+            "defaultValue": 19
         },
         "connections_azureblob_name": {
             "defaultValue": "[concat('azureblob', parameters('counter'))]",
@@ -84,13 +84,6 @@
         "base_path": {
             "type": "String",
             "defaultValue": "https://management.azure.com:443/subscriptions/"
-        },
-        "location_lowercase": {
-            "type": "String",
-            "defaultValue": "centralindia",
-            "metadata": {
-                "description": "Location for all resources."
-            }
         }
     },
     "variables": {},
@@ -208,7 +201,7 @@
                     "description": "Microsoft Azure Storage provides a massively scalable, durable, and highly available storage for data on the cloud, and serves as the data storage solution for modern applications. Connect to Blob Storage to perform various operations such as create, update, get and delete on blobs in your Azure Storage account.",
                     "iconUri": "[concat('https://connectoricons-prod.azureedge.net/releases/v1.0.1591/1.0.1591.2961/', parameters('connections_azureblob_name'), '/icon.png')]",
                     "brandColor": "#804998",
-                    "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location_lowercase'),'/managedApis/', parameters('connections_azureblob_name'))]",
+                    "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location'),'/managedApis/', parameters('connections_azureblob_name'))]",
                     "type": "Microsoft.Web/locations/managedApis"
                 },
                 "testLinks": [
@@ -241,7 +234,7 @@
                     "description": "Azure Cognitive Service for Language, previously known as 'Text Analytics' connector detects language, sentiment and more of the text you provide.",
                     "iconUri": "[concat('https://connectoricons-prod.azureedge.net/releases/v1.0.1584/1.0.1584.2880/', parameters('connections_cognitiveservicestextanalytics_name'), '/icon.png')]",
                     "brandColor": "#1267AE",
-                    "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location_lowercase'),'/managedApis/', parameters('connections_cognitiveservicestextanalytics_name'))]",
+                    "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location'),'/managedApis/', parameters('connections_cognitiveservicestextanalytics_name'))]",
                     "type": "Microsoft.Web/locations/managedApis"
                 },
                 "testLinks": []
@@ -270,7 +263,7 @@
                     "description": "A service that allows content to be converted from one format to another.",
                     "iconUri": "[concat('https://connectoricons-prod.azureedge.net/releases/v1.0.1586/1.0.1586.2912/', parameters('connections_conversionservice_name'), '/icon.png')]",
                     "brandColor": "#4f6bed",
-                    "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location_lowercase'),'/managedApis/', parameters('connections_conversionservice_name'))]",
+                    "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location'),'/managedApis/', parameters('connections_conversionservice_name'))]",
                     "type": "Microsoft.Web/locations/managedApis"
                 },
                 "testLinks": []
@@ -298,7 +291,7 @@
                     "description": "Azure Cosmos DB is a globally distributed multi-model database service designed to enable you to elastically and independently scale throughput and storage across any number of geographical regions with a comprehensive SLA.",
                     "iconUri": "[concat('https://connectoricons-prod.azureedge.net/releases/v1.0.1583/1.0.1583.2865/', parameters('connections_documentdb_name'), '/icon.png')]",
                     "brandColor": "#1C3A56",
-                    "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location_lowercase'),'/managedApis/', parameters('connections_documentdb_name'))]",
+                    "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location'),'/managedApis/', parameters('connections_documentdb_name'))]",
                     "type": "Microsoft.Web/locations/managedApis"
                 },
                 "testLinks": [
@@ -334,7 +327,7 @@
                     "description": "Extracts information from forms and images into structured data based on pre-trained models or model created by a set of representative training forms.",
                     "iconUri": "[concat('https://connectoricons-prod.azureedge.net/releases/v1.0.1580/1.0.1580.2838/', parameters('connections_formrecognizer_name'), '/icon.png')]",
                     "brandColor": "#0063B1",
-                    "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location_lowercase'),'/managedApis/', parameters('connections_formrecognizer_name'))]",
+                    "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location'),'/managedApis/', parameters('connections_formrecognizer_name'))]",
                     "type": "Microsoft.Web/locations/managedApis"
                 },
                 "testLinks": []
@@ -363,7 +356,7 @@
                     "description": "Microsoft Office 365 is a cloud-based service that is designed to help meet your organization's needs for robust security, reliability, and user productivity.",
                     "iconUri": "[concat('https://connectoricons-prod.azureedge.net/releases/v1.0.1591/1.0.1591.2961/', parameters('connections_office365_name'), '/icon.png')]",
                     "brandColor": "#0078D4",
-                    "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location_lowercase'),'/managedApis/', parameters('connections_office365_name'))]",
+                    "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location'),'/managedApis/', parameters('connections_office365_name'))]",
                     "type": "Microsoft.Web/locations/managedApis"
                 },
                 "testLinks": [
@@ -398,7 +391,7 @@
                     "description": "Microsoft Office 365 is a cloud-based service that is designed to help meet your organization's needs for robust security, reliability, and user productivity.",
                     "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1591/1.0.1591.2961/office365/icon.png",
                     "brandColor": "#0078D4",
-                    "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location_lowercase'),'/managedApis/office365')]",
+                    "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location'),'/managedApis/office365')]",
                     "type": "Microsoft.Web/locations/managedApis"
                 },
                 "testLinks": [
@@ -432,7 +425,7 @@
                     "description": "Microsoft Office 365 is a cloud-based service that is designed to help meet your organization's needs for robust security, reliability, and user productivity.",
                     "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1591/1.0.1591.2961/office365/icon.png",
                     "brandColor": "#0078D4",
-                    "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location_lowercase'),'/managedApis/office365')]",
+                    "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location'),'/managedApis/office365')]",
                     "type": "Microsoft.Web/locations/managedApis"
                 },
                 "testLinks": [
@@ -465,7 +458,7 @@
                     "description": "Connect to Azure Service Bus to send and receive messages. You can perform actions such as send to queue, send to topic, receive from queue, receive from subscription, etc.",
                     "iconUri": "[concat('https://connectoricons-prod.azureedge.net/releases/v1.0.1592/1.0.1592.2970/', parameters('connections_servicebus_name'), '/icon.png')]",
                     "brandColor": "#c4d5ff",
-                    "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location_lowercase'),'/managedApis/', parameters('connections_servicebus_name'))]",
+                    "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location'),'/managedApis/', parameters('connections_servicebus_name'))]",
                     "type": "Microsoft.Web/locations/managedApis"
                 },
                 "testLinks": []
@@ -849,22 +842,22 @@
                             "azureblob": {
                                 "connectionId": "[resourceId('Microsoft.Web/connections', parameters('connections_azureblob_name'))]",
                                 "connectionName": "azureblob",
-                                "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location_lowercase'),'/managedApis/azureblob')]"
+                                "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location'),'/managedApis/azureblob')]"
                             },
                             "documentdb": {
                                 "connectionId": "[resourceId('Microsoft.Web/connections', parameters('connections_documentdb_name'))]",
                                 "connectionName": "documentdb",
-                                "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location_lowercase'),'/managedApis/documentdb')]"
+                                "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location'),'/managedApis/documentdb')]"
                             },
                             "office365_1": {
                                 "connectionId": "[resourceId('Microsoft.Web/connections', parameters('connections_office365_2_name'))]",
                                 "connectionName": "office365-2",
-                                "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location_lowercase'),'/managedApis/office365')]"
+                                "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location'),'/managedApis/office365')]"
                             },
                             "servicebus": {
                                 "connectionId": "[resourceId('Microsoft.Web/connections', parameters('connections_servicebus_name'))]",
                                 "connectionName": "servicebus",
-                                "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location_lowercase'),'/managedApis/servicebus')]"
+                                "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location'),'/managedApis/servicebus')]"
                             }
                         }
                     }
@@ -2060,32 +2053,32 @@
                             "azureblob": {
                                 "connectionId": "[resourceId('Microsoft.Web/connections', parameters('connections_azureblob_name'))]",
                                 "connectionName": "azureblob",
-                                "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location_lowercase'),'/managedApis/azureblob')]"
+                                "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location'),'/managedApis/azureblob')]"
                             },
                             "cognitiveservicestextanalytics": {
                                 "connectionId": "[resourceId('Microsoft.Web/connections', parameters('connections_cognitiveservicestextanalytics_name'))]",
                                 "connectionName": "cognitiveservicestextanalytics",
-                                "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location_lowercase'),'/managedApis/cognitiveservicestextanalytics')]"
+                                "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location'),'/managedApis/cognitiveservicestextanalytics')]"
                             },
                             "conversionservice": {
                                 "connectionId": "[resourceId('Microsoft.Web/connections', parameters('connections_conversionservice_name'))]",
                                 "connectionName": "conversionservice",
-                                "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location_lowercase'),'/managedApis/conversionservice')]"
+                                "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location'),'/managedApis/conversionservice')]"
                             },
                             "documentdb": {
                                 "connectionId": "[resourceId('Microsoft.Web/connections', parameters('connections_documentdb_name'))]",
                                 "connectionName": "documentdb",
-                                "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location_lowercase'),'/managedApis/documentdb')]"
+                                "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location'),'/managedApis/documentdb')]"
                             },
                             "office365": {
                                 "connectionId": "[resourceId('Microsoft.Web/connections', parameters('connections_office365_2_name'))]",
                                 "connectionName": "office365-2",
-                                "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location_lowercase'),'/managedApis/office365')]"
+                                "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location'),'/managedApis/office365')]"
                             },
                             "servicebus": {
                                 "connectionId": "[resourceId('Microsoft.Web/connections', parameters('connections_servicebus_name'))]",
                                 "connectionName": "servicebus",
-                                "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location_lowercase'),'/managedApis/servicebus')]"
+                                "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location'),'/managedApis/servicebus')]"
                             }
                         }
                     }
