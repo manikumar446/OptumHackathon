@@ -31,27 +31,27 @@
             "type": "String"
         },
         "namespaces_optumhack_name": {
-            "defaultValue": "optumhack444",
+            "defaultValue": "optumhack555",
             "type": "String"
         },
         "workflows_optumemailreader_name": {
-            "defaultValue": "optumemailreader444",
+            "defaultValue": "optumemailreader555",
             "type": "String"
         },
         "workflows_optumemailprocess_name": {
-            "defaultValue": "optumemailprocess444",
+            "defaultValue": "optumemailprocess555",
             "type": "String"
         },
         "connections_conversionservice_name": {
-            "defaultValue": "conversionservice444",
+            "defaultValue": "conversionservice555",
             "type": "String"
         },
         "storageAccounts_optumhackathonstorage_name": {
-            "defaultValue": "optumhackathonstorage444",
+            "defaultValue": "optumhackathonstorage555",
             "type": "String"
         },
         "accounts_optumformrecognizer_name": {
-            "defaultValue": "optumformrecognizer444",
+            "defaultValue": "optumformrecognizer555",
             "type": "String"
         },
         "connections_cognitiveservicestextanalytics_name": {
@@ -59,7 +59,7 @@
             "type": "String"
         },
         "accounts_optumcognitiveservice_name": {
-            "defaultValue": "optumcognitiveservice444",
+            "defaultValue": "optumcognitiveservice555",
             "type": "String"
         }
     },
