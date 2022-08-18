@@ -4,7 +4,7 @@
     "parameters": {
         "counter": {
             "type": "int",
-            "defaultValue": 9
+            "defaultValue": 19
         },
         "connections_azureblob_name": {
             "defaultValue": "[concat('azureblob', parameters('counter'))]",
@@ -513,7 +513,6 @@
                 "duplicateDetectionHistoryTimeWindow": "PT10M",
                 "maxDeliveryCount": 10,
                 "status": "Active",
-                "autoDeleteOnIdle": "P10675199DT2H48M5.4775807S",
                 "enablePartitioning": false,
                 "enableExpress": false
             }
