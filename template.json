@@ -4,7 +4,7 @@
     "parameters": {
         "counter": {
             "type": "int",
-            "defaultValue": 15
+            "defaultValue": 19
         },
         "connections_azureblob_name": {
             "defaultValue": "[concat('azureblob', parameters('counter'))]",
@@ -154,30 +154,30 @@
                 "name": "Standard_GRS",
                 "tier": "Standard"
             },
-            "kind": "BlobStorage"
-            // "properties": {
-            //     "minimumTlsVersion": "TLS1_0",
-            //     "allowBlobPublicAccess": true,
-            //     "networkAcls": {
-            //         "bypass": "AzureServices",
-            //         "defaultAction": "Allow"
-            //     },
-            //     "supportsHttpsTrafficOnly": true,
-            //     "encryption": {
-            //         "services": {
-            //             "file": {
-            //                 "keyType": "Account",
-            //                 "enabled": true
-            //             },
-            //             "blob": {
-            //                 "keyType": "Account",
-            //                 "enabled": true
-            //             }
-            //         },
-            //         "keySource": "Microsoft.Storage"
-            //     },
-            //     "accessTier": "Hot"
-            // }
+            "kind": "BlobStorage",
+            "properties": {
+                "minimumTlsVersion": "TLS1_0",
+                "allowBlobPublicAccess": true,
+                "networkAcls": {
+                    "bypass": "AzureServices",
+                    "defaultAction": "Allow"
+                },
+                "supportsHttpsTrafficOnly": true,
+                "encryption": {
+                    "services": {
+                        "file": {
+                            "keyType": "Account",
+                            "enabled": true
+                        },
+                        "blob": {
+                            "keyType": "Account",
+                            "enabled": true
+                        }
+                    },
+                    "keySource": "Microsoft.Storage"
+                },
+                "accessTier": "Hot"
+            }
         },
         {
             "type": "Microsoft.Web/connections",
