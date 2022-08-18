@@ -71,7 +71,7 @@
             "name": "[parameters('accounts_optumcognitiveservice_name')]",
             "location": "centralindia",
             "sku": {
-                "name": "S"
+                "name": "F0"
             },
             "kind": "TextAnalytics",
             "identity": {
@@ -81,9 +81,7 @@
                 "apiProperties": {},
                 "customSubDomainName": "[parameters('accounts_optumcognitiveservice_name')]",
                 "networkAcls": {
-                    "defaultAction": "Allow",
-                    "virtualNetworkRules": [],
-                    "ipRules": []
+                    "defaultAction": "Allow"
                 },
                 "publicNetworkAccess": "Enabled"
             }
