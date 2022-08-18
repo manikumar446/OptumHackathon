@@ -4,7 +4,7 @@
     "parameters": {
         "counter": {
             "type": "int",
-            "defaultValue": 37
+            "defaultValue": 35
         },
         "connections_azureblob_name": {
             "defaultValue": "azureblob",
@@ -140,28 +140,28 @@
             "kind": "BlobStorage",
             "properties": {
                 "minimumTlsVersion": "TLS1_2",
-                "allowBlobPublicAccess": true
+                "allowBlobPublicAccess": true,
                 // "networkAcls": {
                 //     "bypass": "AzureServices",
                 //     "virtualNetworkRules": [],
                 //     "ipRules": [],
                 //     "defaultAction": "Allow"
                 // },
-                //"supportsHttpsTrafficOnly": true,
-                // "encryption": {
-                //     "services": {
-                //         "file": {
-                //             "keyType": "Account",
-                //             "enabled": true
-                //         },
-                //         "blob": {
-                //             "keyType": "Account",
-                //             "enabled": true
-                //         }
-                //     },
-                //     "keySource": "Microsoft.Storage"
-                // },
-                //"accessTier": "Hot"
+                "supportsHttpsTrafficOnly": true,
+                "encryption": {
+                    "services": {
+                        "file": {
+                            "keyType": "Account",
+                            "enabled": true
+                        },
+                        "blob": {
+                            "keyType": "Account",
+                            "enabled": true
+                        }
+                    },
+                    "keySource": "Microsoft.Storage"
+                },
+                "accessTier": "Hot"
             }
         },
         {
