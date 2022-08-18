@@ -4,7 +4,7 @@
     "parameters": {
         "counter": {
             "type": "int",
-            "defaultValue": 13
+            "defaultValue": 23
         },
         "connections_azureblob_name": {
             "defaultValue": "[concat('azureblob', parameters('counter'))]",
@@ -156,7 +156,7 @@
             },
             "kind": "BlobStorage",
             "properties": {
-                "minimumTlsVersion": "TLS1_0",
+                "minimumTlsVersion": "1.2",
                 "allowBlobPublicAccess": true,
                 "networkAcls": {
                     "bypass": "AzureServices",
