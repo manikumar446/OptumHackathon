@@ -156,7 +156,7 @@
             },
             "kind": "BlobStorage",
             "properties": {
-                "minimumTlsVersion": "1.2",
+                "minimumTlsVersion": "TLS1_2",
                 "allowBlobPublicAccess": true,
                 "networkAcls": {
                     "bypass": "AzureServices",
@@ -2052,32 +2052,32 @@
                         "value": {
                             "azureblob": {
                                 "connectionId": "[resourceId('Microsoft.Web/connections', parameters('connections_azureblob_name'))]",
-                                "connectionName": "azureblob",
+                                "connectionName": "[parameters('connections_azureblob_name')]",
                                 "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location'),'/managedApis/azureblob')]"
                             },
                             "cognitiveservicestextanalytics": {
                                 "connectionId": "[resourceId('Microsoft.Web/connections', parameters('connections_cognitiveservicestextanalytics_name'))]",
-                                "connectionName": "cognitiveservicestextanalytics",
+                                "connectionName": "[parameters('connections_cognitiveservicestextanalytics_name')]",
                                 "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location'),'/managedApis/cognitiveservicestextanalytics')]"
                             },
                             "conversionservice": {
                                 "connectionId": "[resourceId('Microsoft.Web/connections', parameters('connections_conversionservice_name'))]",
-                                "connectionName": "conversionservice",
+                                "connectionName": "[parameters('connections_conversionservice_name')]",
                                 "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location'),'/managedApis/conversionservice')]"
                             },
                             "documentdb": {
                                 "connectionId": "[resourceId('Microsoft.Web/connections', parameters('connections_documentdb_name'))]",
-                                "connectionName": "documentdb",
+                                "connectionName": "[parameters('connections_documentdb_name')]",
                                 "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location'),'/managedApis/documentdb')]"
                             },
                             "office365": {
                                 "connectionId": "[resourceId('Microsoft.Web/connections', parameters('connections_office365_2_name'))]",
-                                "connectionName": "office365-2",
+                                "connectionName": "[parameters('connections_office365_2_name')]",
                                 "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location'),'/managedApis/office365')]"
                             },
                             "servicebus": {
                                 "connectionId": "[resourceId('Microsoft.Web/connections', parameters('connections_servicebus_name'))]",
-                                "connectionName": "servicebus",
+                                "connectionName": "[parameters('connections_servicebus_name')]",
                                 "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location'),'/managedApis/servicebus')]"
                             }
                         }
