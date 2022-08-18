@@ -4,7 +4,7 @@
     "parameters": {
         "counter": {
             "type": "int",
-            "defaultValue": 23
+            "defaultValue": 43
         },
         "connections_azureblob_name": {
             "defaultValue": "[concat('azureblob', parameters('counter'))]",
@@ -2055,10 +2055,15 @@
                                 "connectionName": "[parameters('connections_azureblob_name')]",
                                 "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location'),'/managedApis/azureblob')]"
                             },
+                            // "cognitiveservicestextanalytics": {
+                            //     "connectionId": "[resourceId('Microsoft.Web/connections', parameters('connections_cognitiveservicestextanalytics_name'))]",
+                            //     "connectionName": "cognitiveservicestextanalytics",
+                            //     "id": "/subscriptions/5f9408a9-1889-41f0-8c06-f3c880e19c6a/providers/Microsoft.Web/locations/southindia/managedApis/cognitiveservicestextanalytics"
+                            // },
                             "cognitiveservicestextanalytics": {
                                 "connectionId": "[resourceId('Microsoft.Web/connections', parameters('connections_cognitiveservicestextanalytics_name'))]",
-                                "connectionName": "[parameters('connections_cognitiveservicestextanalytics_name')]",
-                                "id": "[concat('/subscriptions/',parameters('subscription_id'),'/providers/Microsoft.Web/locations/',parameters('location'),'/managedApis/cognitiveservicestextanalytics')]"
+                                "connectionName": "cognitiveservicestextanalytics",
+                                "id": "/subscriptions/5f9408a9-1889-41f0-8c06-f3c880e19c6a/providers/Microsoft.Web/locations/southindia/managedApis/cognitiveservicestextanalytics"
                             },
                             "conversionservice": {
                                 "connectionId": "[resourceId('Microsoft.Web/connections', parameters('connections_conversionservice_name'))]",
