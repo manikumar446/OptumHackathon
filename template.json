@@ -114,8 +114,8 @@
             "name": "[parameters('namespaces_optumhack_name')]",
             "location": "South India",
             "sku": {
-                "name": "Basic",
-                "tier": "Basic"
+                "name": "Standard",
+                "tier": "Standard"
             },
             "properties": {
                 "minimumTlsVersion": "1.2",
@@ -135,7 +135,7 @@
             },
             "kind": "BlobStorage",
             "properties": {
-                "minimumTlsVersion": "TLS1_0",
+                "minimumTlsVersion": "TLS1_2",
                 "allowBlobPublicAccess": true,
                 "networkAcls": {
                     "bypass": "AzureServices",
@@ -497,7 +497,6 @@
                 "duplicateDetectionHistoryTimeWindow": "PT10M",
                 "maxDeliveryCount": 10,
                 "status": "Active",
-                "autoDeleteOnIdle": "P10675199DT2H48M5.4775807S",
                 "enablePartitioning": false,
                 "enableExpress": false
             }
