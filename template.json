@@ -2,6 +2,10 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
+        "counter": {
+            "type": "int",
+            "defaultValue": 43
+        },
         "connections_azureblob_name": {
             "defaultValue": "azureblob",
             "type": "String"
@@ -35,23 +39,23 @@
             "type": "String"
         },
         "workflows_optumemailreader_name": {
-            "defaultValue": "optumemailreader555",
+            "defaultValue": "[concat('optumemailreader', parameters('counter'))]",
             "type": "String"
         },
         "workflows_optumemailprocess_name": {
-            "defaultValue": "optumemailprocess555",
+            "defaultValue": "[concat('optumemailprocess', parameters('counter'))]",
             "type": "String"
         },
         "connections_conversionservice_name": {
-            "defaultValue": "conversionservice555",
+            "defaultValue": "[concat('conversionservice', parameters('counter'))]",
             "type": "String"
         },
         "storageAccounts_optumhackathonstorage_name": {
-            "defaultValue": "optumhackathonstorage555",
+            "defaultValue": "[concat('optumhackathonstorage', parameters('counter'))]",
             "type": "String"
         },
         "accounts_optumformrecognizer_name": {
-            "defaultValue": "optumformrecognizer555",
+            "defaultValue": "[concat('optumformrecognizer', parameters('counter'))]",
             "type": "String"
         },
         "connections_cognitiveservicestextanalytics_name": {
@@ -59,7 +63,7 @@
             "type": "String"
         },
         "accounts_optumcognitiveservice_name": {
-            "defaultValue": "optumcognitiveservice555",
+            "defaultValue": "[concat('optumcognitiveservice', parameters('counter'))]",
             "type": "String"
         }
     },
@@ -114,8 +118,8 @@
             "name": "[parameters('namespaces_optumhack_name')]",
             "location": "South India",
             "sku": {
-                "name": "Standard",
-                "tier": "Standard"
+                "name": "Basic",
+                "tier": "Basic"
             },
             "properties": {
                 "minimumTlsVersion": "1.2",
@@ -136,28 +140,28 @@
             "kind": "BlobStorage",
             "properties": {
                 "minimumTlsVersion": "TLS1_2",
-                "allowBlobPublicAccess": true,
-                "networkAcls": {
-                    "bypass": "AzureServices",
-                    "virtualNetworkRules": [],
-                    "ipRules": [],
-                    "defaultAction": "Allow"
-                },
-                "supportsHttpsTrafficOnly": true,
-                "encryption": {
-                    "services": {
-                        "file": {
-                            "keyType": "Account",
-                            "enabled": true
-                        },
-                        "blob": {
-                            "keyType": "Account",
-                            "enabled": true
-                        }
-                    },
-                    "keySource": "Microsoft.Storage"
-                },
-                "accessTier": "Hot"
+                "allowBlobPublicAccess": true
+                // "networkAcls": {
+                //     "bypass": "AzureServices",
+                //     "virtualNetworkRules": [],
+                //     "ipRules": [],
+                //     "defaultAction": "Allow"
+                // },
+                //"supportsHttpsTrafficOnly": true,
+                // "encryption": {
+                //     "services": {
+                //         "file": {
+                //             "keyType": "Account",
+                //             "enabled": true
+                //         },
+                //         "blob": {
+                //             "keyType": "Account",
+                //             "enabled": true
+                //         }
+                //     },
+                //     "keySource": "Microsoft.Storage"
+                // },
+                //"accessTier": "Hot"
             }
         },
         {
@@ -462,21 +466,21 @@
                 ]
             }
         },
-        {
-            "type": "Microsoft.ServiceBus/namespaces/networkRuleSets",
-            "apiVersion": "2022-01-01-preview",
-            "name": "[concat(parameters('namespaces_optumhack_name'), '/default')]",
-            "location": "South India",
-            "dependsOn": [
-                "[resourceId('Microsoft.ServiceBus/namespaces', parameters('namespaces_optumhack_name'))]"
-            ],
-            "properties": {
-                "publicNetworkAccess": "Enabled",
-                "defaultAction": "Allow",
-                "virtualNetworkRules": [],
-                "ipRules": []
-            }
-        },
+        // {
+        //     "type": "Microsoft.ServiceBus/namespaces/networkRuleSets",
+        //     "apiVersion": "2022-01-01-preview",
+        //     "name": "[concat(parameters('namespaces_optumhack_name'), '/default')]",
+        //     "location": "South India",
+        //     "dependsOn": [
+        //         "[resourceId('Microsoft.ServiceBus/namespaces', parameters('namespaces_optumhack_name'))]"
+        //     ],
+        //     "properties": {
+        //         "publicNetworkAccess": "Enabled",
+        //         "defaultAction": "Allow",
+        //         "virtualNetworkRules": [],
+        //         "ipRules": []
+        //     }
+        // },
         {
             "type": "Microsoft.ServiceBus/namespaces/queues",
             "apiVersion": "2022-01-01-preview",
