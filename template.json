@@ -71,7 +71,7 @@
             "name": "[parameters('accounts_optumcognitiveservice_name')]",
             "location": "centralindia",
             "sku": {
-                "name": "F0"
+                "name": "S"
             },
             "kind": "TextAnalytics",
             "identity": {
@@ -94,7 +94,7 @@
             "name": "[parameters('accounts_optumformrecognizer_name')]",
             "location": "centralindia",
             "sku": {
-                "name": "F0"
+                "name": "S0"
             },
             "kind": "FormRecognizer",
             "identity": {
