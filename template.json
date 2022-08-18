@@ -4,7 +4,7 @@
     "parameters": {
         "counter": {
             "type": "int",
-            "defaultValue": 26
+            "defaultValue": 76
         },
         "connections_azureblob_name": {
             "defaultValue": "azureblob",
@@ -47,7 +47,7 @@
             "type": "String"
         },
         "connections_conversionservice_name": {
-            "defaultValue": "[concat('conversionservice', parameters('counter'))]",
+            "defaultValue": "conversionservice",
             "type": "String"
         },
         "storageAccounts_optumhackathonstorage_name": {
