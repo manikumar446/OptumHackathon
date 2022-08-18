@@ -4,7 +4,7 @@
     "parameters": {
         "counter": {
             "type": "int",
-            "defaultValue": 76
+            "defaultValue": 33
         },
         "connections_azureblob_name": {
             "defaultValue": "azureblob",
@@ -75,7 +75,7 @@
             "name": "[parameters('accounts_optumcognitiveservice_name')]",
             "location": "centralindia",
             "sku": {
-                "name": "F0"
+                "name": "S"
             },
             "kind": "TextAnalytics",
             "identity": {
