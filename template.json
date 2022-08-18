@@ -4,7 +4,7 @@
     "parameters": {
         "counter": {
             "type": "int",
-            "defaultValue": 19
+            "defaultValue": 13
         },
         "connections_azureblob_name": {
             "defaultValue": "[concat('azureblob', parameters('counter'))]",
